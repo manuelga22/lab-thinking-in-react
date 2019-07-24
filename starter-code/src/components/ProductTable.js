@@ -14,12 +14,13 @@ constructor(props){
   showAllProducts =()=>{
   return this.props.state.visibleList.map(function(eachProduct, i){
     //console.log(eachProduct)
-
+   
     return(
       <ProductRow 
       key = {i}
       name={eachProduct.name} 
       price= {eachProduct.price}
+      stocked = {eachProduct.stocked}
       />
     );
  });

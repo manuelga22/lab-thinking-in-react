@@ -17,6 +17,7 @@ class searchBar extends Component{
    <h6>Search</h6>
    <label></label>
    <input type="text" onChange = {this.props.searchBar}></input>
+   <input type="checkbox" onChange = {this.props.displayInStock}/> Only products in stock<br/>
    </div>
  );
 
