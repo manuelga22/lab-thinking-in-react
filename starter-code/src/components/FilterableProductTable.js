@@ -9,38 +9,54 @@ class productTable extends Component{
     this.state = {
       searchValue : "",
       data: [...Data.data],
-      visibleList : [...Data.data]
+      visibleList : [...Data.data],
+      inStockList: [],
+      checkbox : "",
     }
   }
-
-  searchBar=(e)=>{
-    //console.log(this.state.data);
-    console.log(e.target.value)
+  setInStock=(e)=>{
     let clone = [...this.state.data];
+    let filtered = clone.filter((eachProduct)=>{
+      return eachProduct.stocked;
+    })
+    this.setState({inStockList: filtered});
+  }
+  searchBar=(e)=>{
+    this.setInStock();
+    //console.log(this.state.data);
+    let clone;
+    //console.log(e.target.value)   
+    if(this.state.checkbox == true){
+      console.log("instock",this.state.inStockList)
+      clone = [...this.state.inStockList];
+    }else{
+      clone = [...this.state.data];
+    }
     let searchTerm = e.target.value;
     this.state.searchValue = searchTerm;
-    let filteredList = clone.filter((eachFood)=>{
-      return eachFood.name.toUpperCase().includes(searchTerm.toUpperCase());
+    let filteredProducts = clone.filter((eachProduct)=>{
+      return eachProduct.name.toUpperCase().includes(searchTerm.toUpperCase());
     });
-    this.setState({visibleList: filteredList})
+    this.setState({visibleList: filteredProducts})
   }
 
   checkIfInStock=(e)=>{
     //console.log(e.target.checked)
     if(e.target.checked=== true){
       let clone = [...this.state.visibleList];
-       let inStockList = clone.filter((eachFood)=>{
+       let filteredList = clone.filter((eachFood)=>{
          return eachFood.stocked;
        })
        
-       this.setState({visibleList: inStockList})
-       console.log("ccc", inStockList)
+       this.setState({checkbox: true});
+       this.setState({visibleList: filteredList})
+       
     }else{
       let clone = [...this.state.data];
- 
       let filteredList = clone.filter((eachFood)=>{
         return eachFood.name.toUpperCase().includes(this.state.searchValue.toUpperCase());
       });
+      this.setState({checkbox: false});
       this.setState({visibleList: filteredList})
     }
   }

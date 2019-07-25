@@ -11,7 +11,7 @@ class searchBar extends Component{
 
 
   render(){
-    console.log(this.state)
+    //console.log(this.state)
  return(
    <div id = "search">
    <h6>Search</h6>

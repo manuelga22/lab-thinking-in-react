@@ -30,8 +30,8 @@ constructor(props){
  }
 
 render(){
-  console.log("product table component")
-  console.log(this.state)
+  //console.log("product table component")
+  //console.log(this.state)
    return(
      <div>
        <ul className = "table">
